@@ -10,8 +10,24 @@
         hr { margin: 40px 0; }
         .lang-block { margin-bottom: 80px; }
     </style>
+    <script>
+      function setLanguage(lang) {
+        document.querySelectorAll('.lang-block').forEach(el => {
+          el.style.display = el.getAttribute('lang') === lang ? 'block' : 'none';
+        });
+        localStorage.setItem('preferredLanguage', lang);
+      }
+      window.addEventListener('DOMContentLoaded', () => {
+        const lang = localStorage.getItem('preferredLanguage') || 'en';
+        setLanguage(lang);
+      });
+    </script>
 </head>
 <body>
+    <div style="text-align: right; margin-bottom: 20px;">
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('ru')">Русский</button>
+    </div>
     <div class="lang-block" lang="en">
         <h1>Privacy Policy</h1>
         <p><strong>Effective Date:</strong> [Date]</p>
@@ -48,7 +64,7 @@
 
     <hr>
 
-    <div class="lang-block" lang="ru">
+    <div class="lang-block" lang="ru" style="display:none">
         <h1>Политика конфиденциальности</h1>
         <p><strong>Дата вступления в силу:</strong> [дата]</p>
         <p>Настоящая политика объясняет, какие данные собирает мобильное приложение «GoNext», как они используются и как мы обеспечиваем их безопасность.</p>
